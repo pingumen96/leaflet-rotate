@@ -1,60 +1,54 @@
+import { installPoint } from './geometry/Point';
+import { installDomUtil } from './dom/DomUtil';
+import { installDraggable } from './dom/Draggable';
+import { installDivOverlay } from './layer/DivOverlay';
+import { installPopup } from './layer/Popup';
+import { installTooltip } from './layer/Tooltip';
+import { installMarkerIcon } from './layer/marker/Icon';
+import { installMarker } from './layer/marker/Marker';
+import { installGridLayer } from './layer/tile/GridLayer';
+import { installRenderer } from './layer/vector/Renderer';
+import { installMap } from './map/Map';
+import { installCompassBearing } from './map/handler/CompassBearing';
+import { installContainerMutation } from './map/handler/ContainerMutation';
+import { installTouchGestures } from './map/handler/TouchGestures';
+import { installTouchRotate } from './map/handler/TouchRotate';
+import { installShiftKeyRotate } from './map/handler/ShiftKeyRotate';
+import { installTouchZoom } from './map/handler/TouchZoom';
+import { installRotateControl } from './control/Rotate';
+
 /**
- * Export Leaflet classes in the same order as the core library
- * 
- * @external L
+ * Apply the Leaflet-Rotate extensions to a provided Leaflet namespace.
+ * The function returns the same namespace to enable chaining.
  *
- * @see https://github.com/Leaflet/Leaflet/tree/v1.9.3/src/Leaflet.js
- * 
- * @see https://github.com/Leaflet/Leaflet/blob/v1.9.3/src/control/index.js
- * @see https://github.com/Leaflet/Leaflet/blob/v1.9.3/src/core/index.js
- * 
- * @see https://github.com/Leaflet/Leaflet/blob/v1.9.3/src/dom/index.js
- * @see https://github.com/Leaflet/Leaflet/blob/v1.9.3/src/geometry/index.js
- * @see https://github.com/Leaflet/Leaflet/blob/v1.9.3/src/geo/index.js
- * @see https://github.com/Leaflet/Leaflet/blob/v1.9.3/src/layer/index.js
- * @see https://github.com/Leaflet/Leaflet/blob/v1.9.3/src/layer/marker/index.js
- * @see https://github.com/Leaflet/Leaflet/blob/v1.9.3/src/layer/tile/index.js
- * @see https://github.com/Leaflet/Leaflet/blob/v1.9.3/src/layer/vector/index.js
- * @see https://github.com/Leaflet/Leaflet/blob/v1.9.3/src/map/index.js
+ * @param {typeof L} L Leaflet namespace to extend.
+ * @returns {typeof L}
  */
+export function install(L) {
+    if (!L || typeof L !== 'object') {
+        throw new Error('Leaflet namespace required');
+    }
 
-// import {version} from '../package.json';
-// export {version};
+    installPoint(L);
+    installDomUtil(L);
+    installDraggable(L);
+    installMap(L);
+    installDivOverlay(L);
+    installPopup(L);
+    installTooltip(L);
+    installMarkerIcon(L);
+    installMarker(L);
+    installGridLayer(L);
+    installRenderer(L);
+    installCompassBearing(L);
+    installContainerMutation(L);
+    installTouchGestures(L);
+    installTouchRotate(L);
+    installShiftKeyRotate(L);
+    installTouchZoom(L);
+    installRotateControl(L);
 
-// control
-// export * from './core/index';
+    return L;
+}
 
-// core
-// export * from './core/index';
-
-// dom
-export * from './dom/DomUtil';
-export * from './dom/Draggable';
-
-// geometry
-export * from './geometry/Point';
-export * from './geometry/Bounds';
-
-// geo
-export * from './geo/LatLngBounds';
-
-// layer
-export * from './layer/DivOverlay';
-export * from './layer/Popup';
-export * from './layer/Tooltip';
-export * from './layer/marker/Icon';
-export * from './layer/marker/Marker';
-export * from './layer/tile/GridLayer';
-export * from './layer/vector/Renderer';
-
-// map
-export * from './map/Map';
-export * from './map/handler/CompassBearing';
-export * from './map/handler/ContainerMutation';
-export * from './map/handler/TouchGestures';
-export * from './map/handler/TouchRotate';
-export * from './map/handler/ShiftKeyRotate';
-export * from './map/handler/TouchZoom';
-
-// custom controls
-export * from './control/Rotate';
+export default { install };

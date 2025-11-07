@@ -12,6 +12,11 @@
 
 		<!-- Leaflet-Rotate -->
 		<script src="../dist/leaflet-rotate-src.js"></script>
+		<script>
+			if (typeof LeafletRotate !== 'undefined') {
+				LeafletRotate.install(L);
+			}
+		</script>
 
 		<!-- include some miscellaneous -->
 		<script src="../misc/route.js"></script>
@@ -27,10 +32,6 @@
 				max-height: 50vh;
 			}
 			/* TODO: fix incorrect map corners position when map has some margin */
-			html, body {
-				/* margin: 0; */
-				/* padding: 0; */
-			}
 		</style>
 	</head>
 

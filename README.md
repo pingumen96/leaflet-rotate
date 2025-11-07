@@ -7,6 +7,26 @@ A Leaflet plugin that allows to add rotation functionality to map tiles
 
 _For a working example see the following [demo](https://raruto.github.io/leaflet-rotate/examples/leaflet-rotate.html)_
 
+### Usage
+
+```javascript
+import L from 'leaflet';
+import { install } from 'leaflet-rotate';
+
+install(L);
+
+const map = L.map('map', { rotate: true });
+```
+
+```html
+<script src="leaflet.js"></script>
+<script src="leaflet-rotate.js"></script>
+<script>
+    LeafletRotate.install(L);
+    const map = L.map('map', { rotate: true });
+</script>
+```
+
 <p align="center">
     <a href="https://raruto.github.io/leaflet-rotate/examples/leaflet-rotate.html"><img src="https://raruto.github.io/img/leaflet-rotate.png" alt="Leaflet rotate viewer" /></a>
 </p>
@@ -39,7 +59,7 @@ After that you can start developing inside the `src` and `test` folders (eg. ope
 
 **Side notes:**
 
-Be aware that this library overrides notable parts of leaflet core via the [L.Class.include()](https://leafletjs.com/examples/extending/extending-1-classes.html) function in order to make the rotate feature usable as a standalone plug-in.
+The plugin no longer patches the Leaflet namespace automatically on import. Explicitly install the extension by calling `LeafletRotate.install(L)` (UMD) or `import {install} from 'leaflet-rotate'; install(L);` (ESM). After installation the library still augments Leaflet classes via [L.Class.include()](https://leafletjs.com/examples/extending/extending-1-classes.html) to enable rotation.
 
 Initial changes to this project have been apported by comparing the following branches: [https://github.com/Leaflet/Leaflet/compare/main...fnicollet:rotate-master](https://github.com/Leaflet/Leaflet/compare/main...fnicollet:rotate-master) (ref: [bac6c7d](https://github.com/fnicollet/Leaflet/tree/4ab6342f74516e7087dcd2ae786c721f36addf9e))
 

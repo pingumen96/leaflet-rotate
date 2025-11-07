@@ -1,15 +1,17 @@
 import terser from "@rollup/plugin-terser";
 import resolve from '@rollup/plugin-node-resolve';
 import commonJS from '@rollup/plugin-commonjs';
+import { readFileSync } from 'fs';
 
-import plugin from '../package.json' assert { type: "json" };
+const plugin = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)));
 
 let input = "src/index.js";
 let output = {
   file: "dist/" + plugin.name + "-src.js",
   format: "umd",
   sourcemap: true,
-  name: plugin.name,
+  name: "LeafletRotate",
+  exports: "named",
 };
 
 let plugins = [
@@ -20,15 +22,15 @@ let plugins = [
 ];
 
 export default [{
-    input: input,
-    output: output,
-    plugins: plugins,
-  },
-  {
-    input: input,
-    output: Object.assign({}, output, {
-      file: "dist/" + plugin.name + ".js"
-    }),
-    plugins: plugins.concat(terser()),
-  }
+  input: input,
+  output: output,
+  plugins: plugins,
+},
+{
+  input: input,
+  output: Object.assign({}, output, {
+    file: "dist/" + plugin.name + ".js"
+  }),
+  plugins: plugins.concat(terser()),
+}
 ];
